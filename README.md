@@ -26,33 +26,18 @@ Dengan Ketentuan berikut :
 | Fritz | DNS Server | Static |
 | Warhammer | Database Server | Static |
 |Beast | Load Balancer (Laravel) | Static |
-|Colossal
-Load Balancer (PHP)
-Static
-| Annie
-Laravel Worker
-Static
-| Bertholdt
-Laravel Worker
-Static
-| Reiner
-Laravel Worker
-Static
-| Armin
-PHP Worker
-Static
-Eren
-PHP Worker
-Static
-Mikasa
-PHP Worker
-Static
-Zeke
-Client
-Dynamic
-Erwin
-Client
-Dynamic
+|Colossal | Load Balancer (PHP) | Static |
+| Annie | Laravel Worker | Static | 
+| Bertholdt | Laravel Worker | Static |
+| Reiner| Laravel Worker | Static | 
+| Armin | PHP Worker | Static |
+| Eren | PHP Worker | Static |
+| Mikasa | PHP Worker | Static | 
+| Zeke | Client | Dynamic | 
+| Erwin | Client | Dynamic | 
+
+# Membuat Konfigurasi
+
 
 
 
