@@ -36,7 +36,154 @@ Dengan Ketentuan berikut :
 | Zeke | Client | Dynamic | 
 | Erwin | Client | Dynamic | 
 
-# Membuat Konfigurasi
+# CONFIG NODE
+- Paradis
+```
+#Paradis (DHCP Relay)
+auto eth0
+iface eth0 inet dhcp
+
+auto eth1
+iface eth1 inet static
+    address 192.236.1.1
+    netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+    address 192.236.2.1
+    netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+    address 192.236.3.1
+    netmask 255.255.255.0
+
+auto eth4
+iface eth4 inet static
+    address 192.236.4.1
+    netmask 255.255.255.0
+```
+
+- Annie
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.1.2
+    netmask 255.255.255.0
+    gateway 192.236.1.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Bertholdt
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.1.3
+    netmask 255.255.255.0
+    gateway 192.236.1.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Reinier
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.1.4
+    netmask 255.255.255.0
+    gateway 192.236.1.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Zeke
+```
+auto eth0
+iface eth0 inet dhcp
+```
+
+- Armin
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.2.2
+    netmask 255.255.255.0
+    gateway 192.236.2.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Mikasa
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.2.3
+    netmask 255.255.255.0
+    gateway 192.236.2.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Eren
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.2.4
+    netmask 255.255.255.0
+    gateway 192.236.2.1
+```
+
+- Erwin
+```
+auto eth0
+iface eth0 inet dhcp
+```
+
+- Beast
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.3.2
+    netmask 255.255.255.0
+    gateway 192.236.3.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Colossal
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.3.3
+    netmask 255.255.255.0
+    gateway 192.236.3.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Warhammer
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.3.4
+    netmask 255.255.255.0
+    gateway 192.236.3.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Tybur
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.4.2
+    netmask 255.255.255.0
+    gateway 192.236.4.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
+
+- Fritz
+```
+auto eth0
+iface eth0 inet static
+    address 192.236.4.3
+    netmask 255.255.255.0
+    gateway 192.236.4.1
+    up echo 192.168.122.1 > /etc/resolv.conf
+```
 
 
 
