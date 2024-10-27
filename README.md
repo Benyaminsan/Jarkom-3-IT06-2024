@@ -127,6 +127,7 @@ iface eth0 inet static
     address 192.236.2.4
     netmask 255.255.255.0
     gateway 192.236.2.1
+    up echo 192.168.122.1 > /etc/resolv.conf
 ```
 
 - Erwin
@@ -188,9 +189,87 @@ iface eth0 inet static
 # PRE-SOAL
 Pulau Paradis dan Marley, sama-sama menghadapi ancaman besar dari satu sama lain. Keduanya membangun infrastruktur pertahanan yang kuat untuk melindungi sistem vital mereka. Dengan strategi yang matang, mereka bersiap menghadapi serangan dan mempertahankan wilayah masing-masing.
 Bangsa Marley, dipimpin oleh Zeke, telah mempersiapkan Annie, Bertholdt, dan Reiner untuk menyerang menggunakan Laravel Worker. Di sisi lain, Klan Eldia dari Paradis telah mempersiapkan Armin, Eren, dan Mikasa sebagai PHP Worker untuk mempertahankan pulau tersebut. Warhammer bertindak sebagai Database Server, sementara Beast dan Colossal sebagai Load Balancer. 
----------------------
 
+# NO 0
+Pulau Paradis telah menjadi tempat yang damai selama 1000 tahun, namun kedamaian tersebut tidak bertahan selamanya. Perang antara kaum Marley dan Eldia telah mencapai puncak. Kaum Marley yang dipimpin oleh Zeke, me-register domain name marley.yyy.com untuk worker Laravel mengarah pada Annie. Namun ternyata tidak hanya kaum Marley saja yang berinisiasi, kaum Eldia ternyata sudah mendaftarkan domain name eldia.yyy.com untuk worker PHP (0) mengarah pada Armin.
 
+# NO 1
+Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
+# NO 1.1 - 5
+Jauh sebelum perang dimulai, ternyata para keluarga bangsawan, Tybur dan Fritz, telah membuat kesepakatan sebagai berikut:
+Semua Client harus menggunakan konfigurasi ip address dari keluarga Tybur (dhcp).
+Client yang melalui bangsa marley mendapatkan range IP dari [prefix IP].1.05 - [prefix IP].1.25 dan [prefix IP].1.50 - [prefix IP].1.100 (2)
+Client yang melalui bangsa eldia mendapatkan range IP dari [prefix IP].2.09 - [prefix IP].2.27 dan [prefix IP].2 .81 - [prefix IP].2.243 (3)
+Client mendapatkan DNS dari keluarga Fritz dan dapat terhubung dengan internet melalui DNS tersebut (4)
+Dikarenakan keluarga Tybur tidak menyukai kaum eldia, maka mereka hanya meminjamkan ip address ke kaum eldia selama 6 menit. Namun untuk kaum marley, keluarga Tybur meminjamkan ip address selama 30 menit. Waktu maksimal dialokasikan untuk peminjaman alamat IP selama 87 menit. (5)
+
+- Pertama, kita setup Paradis dulu agar dhcpnya lancar:
+```
+apt-get update
+apt install isc-dhcp-relay -y
+
+service isc-dhcp-relay start 
+
+echo '# Defaults for isc-dhcp-relay initscript
+
+# sourced by /etc/init.d/isc-dhcp-relay
+# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+#
+# This is a POSIX shell fragment
+#
+
+# What servers should the DHCP relay forward requests to? (Disini kita masukkan IP Tybur)
+SERVERS="192.236.4.2" 
+
+# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+INTERFACES="eth1 eth2 eth3 eth4"
+
+# Additional options that are passed to the DHCP relay daemon?
+OPTIONS=""' > /etc/default/isc-dhcp-relay
+
+echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
+
+service isc-dhcp-relay restart
+
+```
+- Selanjutnya, buka /etc/dhcp/dhcpd.conf dengan:
+```
+nano /etc/dhcp/dhcpd.conf
+```
+- Lalu, masukkan script dibawah ke Tybur - Ada beberapa detail mengenai nomor berapa yang dikerjakan:
+
+```
+# NO 1 cuma assign ip address
+# NO 2 benerin subnet buat client Marley
+subnet 192.236.1.0 netmask 255.255.255.0 {
+    range 192.236.1.5 192.236.1.25; 
+    range 192.236.1.50 192.236.1.100;
+    option routers 192.236.1.1;
+    option broadcast-address 192.236.1.255;
+    option domain-name-servers 192.236.4.2;  # Fritz DNS Server
+    default-lease-time 1800;  # Lease time 30 menit untuk Marley - NO 5
+    max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
+}
+# NO 3 subnet client Eldia
+subnet 192.236.2.0 netmask 255.255.255.0 {
+    range 192.236.2.9 192.236.2.27;
+    range 192.236.2.81 192.236.2.243;
+    option routers 192.236.2.1;
+    option broadcast-address 192.236.2.255;
+    option domain-name-servers 192.236.4.2;  # Fritz DNS Server
+    default-lease-time 360;   # Lease time 6 menit untuk Eldia - NO 5
+    max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
+}
+
+subnet 192.236.3.0 netmask 255.255.255.0 {
+    option routers 192.236.3.1;
+}
+
+subnet 192.236.4.0 netmask 255.255.255.0 {
+    option routers 192.236.4.1;
+}
+```
 
 
 
