@@ -329,7 +329,7 @@ subnet 192.236.1.0 netmask 255.255.255.0 {
     range 192.236.1.50 192.236.1.100;
     option routers 192.236.1.1;
     option broadcast-address 192.236.1.255;
-    option domain-name-servers 192.236.4.2;  # Fritz DNS Server
+    option domain-name-servers 192.236.4.2;  # Fritz DNS Server - NO 4
     default-lease-time 1800;  # Lease time 30 menit untuk Marley - NO 5
     max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
 }
@@ -339,7 +339,7 @@ subnet 192.236.2.0 netmask 255.255.255.0 {
     range 192.236.2.81 192.236.2.243;
     option routers 192.236.2.1;
     option broadcast-address 192.236.2.255;
-    option domain-name-servers 192.236.4.2;  # Fritz DNS Server
+    option domain-name-servers 192.236.4.2;  # Fritz DNS Server - N0 4
     default-lease-time 360;   # Lease time 6 menit untuk Eldia - NO 5
     max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
 }
@@ -353,13 +353,13 @@ subnet 192.236.4.0 netmask 255.255.255.0 {
 }
 ```
 
-# DOKUMENTASI NO 2
+# DOKUMENTASI NO 1.2
 ![WhatsApp Image 2024-10-27 at 17 01 03_ce6ef941](https://github.com/user-attachments/assets/6192360f-13b6-4f1b-af41-d63326760e8f)
 
-# DOKUMENTASI NO 3
+# DOKUMENTASI NO 1.3
 ![WhatsApp Image 2024-10-27 at 17 02 36_c5f7573d](https://github.com/user-attachments/assets/edf39a11-34b6-4e6e-abbe-a1d01e5a212e)
 
-# DOKUMENTASI NO 4
+# DOKUMENTASI NO 1.4
 ![WhatsApp Image 2024-10-27 at 17 28 53_94750658](https://github.com/user-attachments/assets/25f46097-017f-4e63-a3a1-6e6b85fa908f)
 ![WhatsApp Image 2024-10-27 at 17 30 55_e11b13a8](https://github.com/user-attachments/assets/2d8fcab8-fec0-416d-9a83-90fdb2f79f52)
 
