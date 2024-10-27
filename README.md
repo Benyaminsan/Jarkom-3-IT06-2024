@@ -190,6 +190,7 @@ iface eth0 inet static
 - Jangan lupa, masukkan config berikut. Sesuai dengan nama-namanya. Lewat ``` nano /root/.bashrc ```
 - Paradis (DHCP Relay)
 ```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.236.0.0/16
 apt-get update
 apt-get install isc-dhcp-relay -y
 ```
@@ -223,9 +224,7 @@ apt-get install htop -y
 apt-get install apache2-utils -y
 apt-get install jq -y
 ```
-```
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.236.0.0/16
-```
+
 # PRE-SOAL
 Pulau Paradis dan Marley, sama-sama menghadapi ancaman besar dari satu sama lain. Keduanya membangun infrastruktur pertahanan yang kuat untuk melindungi sistem vital mereka. Dengan strategi yang matang, mereka bersiap menghadapi serangan dan mempertahankan wilayah masing-masing.
 Bangsa Marley, dipimpin oleh Zeke, telah mempersiapkan Annie, Bertholdt, dan Reiner untuk menyerang menggunakan Laravel Worker. Di sisi lain, Klan Eldia dari Paradis telah mempersiapkan Armin, Eren, dan Mikasa sebagai PHP Worker untuk mempertahankan pulau tersebut. Warhammer bertindak sebagai Database Server, sementara Beast dan Colossal sebagai Load Balancer. 
