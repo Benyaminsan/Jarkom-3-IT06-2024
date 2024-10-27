@@ -186,8 +186,46 @@ iface eth0 inet static
     up echo 192.168.122.1 > /etc/resolv.conf
 ```
 
-Ada yang error gabisa connect internet? Cek ``` nano etc/resolv.conf ``` - apakah udah ada ``` nameserver 192.168.122.1 ``` ? Apabila belum, masukkan dan lakukan ulang.
-
+- Ada yang error gabisa connect internet? Cek ``` nano etc/resolv.conf ``` - apakah udah ada ``` nameserver 192.168.122.1 ``` ? Apabila belum, masukkan dan lakukan ulang.
+- Jangan lupa, masukkan config berikut. Sesuai dengan nama-namanya. Lewat ``` nano /root/.bashrc ```
+- Paradis (DHCP Relay)
+```
+apt-get update
+apt-get install isc-dhcp-relay -y
+```
+- Tybur (DHCP Server)
+```
+apt-get update
+apt-get install isc-dhcp-server -y
+```
+- Fritz (DNS Server)
+```
+apt-get update
+apt-get install bind9 -y
+```
+- Beast & Colossal (Load Balancer)
+```
+apt-get update
+apt-get install apache2-utils -y
+apt-get install nginx -y
+apt-get install lynx -y
+```
+- Warhammer (DB Server)
+```
+apt-get update
+apt-get install mariadb-server -y
+```
+- Zeke dan Erwin (Client)
+```
+apt-get update
+apt-get install lynx -y
+apt-get install htop -y
+apt-get install apache2-utils -y
+apt-get install jq -y
+```
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.236.0.0/16
+```
 # PRE-SOAL
 Pulau Paradis dan Marley, sama-sama menghadapi ancaman besar dari satu sama lain. Keduanya membangun infrastruktur pertahanan yang kuat untuk melindungi sistem vital mereka. Dengan strategi yang matang, mereka bersiap menghadapi serangan dan mempertahankan wilayah masing-masing.
 Bangsa Marley, dipimpin oleh Zeke, telah mempersiapkan Annie, Bertholdt, dan Reiner untuk menyerang menggunakan Laravel Worker. Di sisi lain, Klan Eldia dari Paradis telah mempersiapkan Armin, Eren, dan Mikasa sebagai PHP Worker untuk mempertahankan pulau tersebut. Warhammer bertindak sebagai Database Server, sementara Beast dan Colossal sebagai Load Balancer. 
