@@ -271,6 +271,12 @@ subnet 192.236.4.0 netmask 255.255.255.0 {
 }
 ```
 
+# DOKUMENTASI NO 2
+![WhatsApp Image 2024-10-27 at 17 01 03_ce6ef941](https://github.com/user-attachments/assets/6192360f-13b6-4f1b-af41-d63326760e8f)
+
+# DOKUMENTASI NO 3
+![WhatsApp Image 2024-10-27 at 17 02 36_c5f7573d](https://github.com/user-attachments/assets/edf39a11-34b6-4e6e-abbe-a1d01e5a212e)
+
 
 
 
