@@ -39,7 +39,6 @@ Dengan Ketentuan berikut :
 # CONFIG NODE
 - Paradis
 ```
-#Paradis (DHCP Relay)
 auto eth0
 iface eth0 inet dhcp
 
