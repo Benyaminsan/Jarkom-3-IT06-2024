@@ -243,7 +243,7 @@ service bind9 restart
 ```
 # NO 1
 Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
-# NO 1.1 - 5
+# NO 1.1 - 1.5
 Jauh sebelum perang dimulai, ternyata para keluarga bangsawan, Tybur dan Fritz, telah membuat kesepakatan sebagai berikut:
 Semua Client harus menggunakan konfigurasi ip address dari keluarga Tybur (dhcp).
 Client yang melalui bangsa marley mendapatkan range IP dari [prefix IP].1.05 - [prefix IP].1.25 dan [prefix IP].1.50 - [prefix IP].1.100 (2)
@@ -284,11 +284,11 @@ echo net.ipv4.ip_forward=1 > /etc/sysctl.conf
 service isc-dhcp-relay restart
 
 ```
-- Selanjutnya, buka /etc/dhcp/dhcpd.conf dengan:
+- Selanjutnya, buka /etc/dhcp/dhcpd.conf di Tybur dengan:
 ```
 nano /etc/dhcp/dhcpd.conf
 ```
-- Lalu, masukkan script dibawah ke Tybur - Ada beberapa detail mengenai nomor berapa yang dikerjakan:
+- Lalu, masukkan script dibawah ke dalamnya - Ada beberapa detail mengenai nomor berapa yang dikerjakan:
 
 ```
 # NO 1 cuma assign ip address
