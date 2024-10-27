@@ -193,6 +193,52 @@ Bangsa Marley, dipimpin oleh Zeke, telah mempersiapkan Annie, Bertholdt, dan Rei
 # NO 0
 Pulau Paradis telah menjadi tempat yang damai selama 1000 tahun, namun kedamaian tersebut tidak bertahan selamanya. Perang antara kaum Marley dan Eldia telah mencapai puncak. Kaum Marley yang dipimpin oleh Zeke, me-register domain name marley.yyy.com untuk worker Laravel mengarah pada Annie. Namun ternyata tidak hanya kaum Marley saja yang berinisiasi, kaum Eldia ternyata sudah mendaftarkan domain name eldia.yyy.com untuk worker PHP (0) mengarah pada Armin.
 
+- Masukkan script berikut ke Fritz:
+```
+echo 'zone "marley.it06.com" { 
+        type master; 
+        file "/etc/bind/marley/marley.it06.com";
+};
+
+zone "eldia.it06.com" {
+        type master;
+        file "/etc/bind/eldia/eldia.it06.com";
+}; ' >> /etc/bind/named.conf.local
+
+mkdir /etc/bind/marley
+mkdir /etc/bind/eldia
+
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     marley.it06.com. root.marley.it06.com. (
+                  2024102619        ; Serial
+                         604800         ; Refresh
+                          86400          ; Retry
+                        2419200        ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      marley.it06.com.
+@       IN      A       192.236.1.2     ; IP Annie' > /etc/bind/marley/marley.it06.com
+
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     eldia.it06.com. root.eldia.it06.com. (
+                   2024102619       ; Serial
+                         604800         ; Refresh
+                          86400          ; Retry
+                        2419200        ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      eldia.it06.com.
+@       IN      A       192.236.2.2    ; IP Armin' > /etc/bind/eldia/eldia.it06.com
+
+service bind9 restart
+
+```
 # NO 1
 Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
 # NO 1.1 - 5
@@ -204,6 +250,9 @@ Client mendapatkan DNS dari keluarga Fritz dan dapat terhubung dengan internet m
 Dikarenakan keluarga Tybur tidak menyukai kaum eldia, maka mereka hanya meminjamkan ip address ke kaum eldia selama 6 menit. Namun untuk kaum marley, keluarga Tybur meminjamkan ip address selama 30 menit. Waktu maksimal dialokasikan untuk peminjaman alamat IP selama 87 menit. (5)
 
 - Pertama, kita setup Paradis dulu agar dhcpnya lancar:
+```
+nano etc/root/.bashrc
+```
 ```
 apt-get update
 apt install isc-dhcp-relay -y
@@ -276,6 +325,11 @@ subnet 192.236.4.0 netmask 255.255.255.0 {
 
 # DOKUMENTASI NO 3
 ![WhatsApp Image 2024-10-27 at 17 02 36_c5f7573d](https://github.com/user-attachments/assets/edf39a11-34b6-4e6e-abbe-a1d01e5a212e)
+
+# DOKUMENTASI NO 4
+![WhatsApp Image 2024-10-27 at 17 28 53_94750658](https://github.com/user-attachments/assets/25f46097-017f-4e63-a3a1-6e6b85fa908f)
+![WhatsApp Image 2024-10-27 at 17 30 55_e11b13a8](https://github.com/user-attachments/assets/2d8fcab8-fec0-416d-9a83-90fdb2f79f52)
+
 
 
 
