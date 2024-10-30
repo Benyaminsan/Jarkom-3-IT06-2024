@@ -277,6 +277,96 @@ $TTL    604800
 service bind9 restart
 
 ```
+
+- Misal belum bisa, maka lakukan berikut:
+```
+nano /etc/bind/named.conf.local
+```
+- Terus masukkan ini:
+```
+zone "marley.it06.com" { 
+    type master; 
+    file "/etc/bind/marley/marley.it06.com";
+};
+
+zone "eldia.it06.com" {
+    type master;
+    file "/etc/bind/eldia/eldia.it06.com";
+};
+
+```
+- Verify dengan ini:
+```
+cat /etc/bind/named.conf.local
+```
+- Misal masih belum bisa, cek dengan command ini:
+```
+cat /etc/bind/marley/marley.it06.com
+```
+- Terus hasilnya harusnya ada ini:
+```
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     marley.it06.com. root.marley.it06.com. (
+                  2024102619        ; Serial
+                         604800         ; Refresh
+                          86400          ; Retry
+                        2419200        ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      marley.it06.com.
+@       IN      A       192.236.1.2     ; IP Annie
+```
+- Belum ada lagi? Maka lanjutkan dengan cara manual. Gunakan command berikut buat bikin foldernya:
+```
+mkdir -p /etc/bind/marley
+mkdir -p /etc/bind/eldia
+```
+- Masukkan ini ke marley.it06.com:
+```
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     marley.it06.com. root.marley.it06.com. (
+                  2024102619        ; Serial
+                         604800         ; Refresh
+                          86400          ; Retry
+                        2419200        ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      marley.it06.com.
+@       IN      A       192.236.1.2     ; IP Annie' | tee /etc/bind/marley/marley.it06.com
+
+```
+- Dan ini ke eldia.it06.com:
+```
+echo ';
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     eldia.it06.com. root.eldia.it06.com. (
+                   2024102619       ; Serial
+                         604800         ; Refresh
+                          86400          ; Retry
+                        2419200        ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      eldia.it06.com.
+@       IN      A       192.236.2.2    ; IP Armin' | tee /etc/bind/eldia/eldia.it06.com
+
+```
+- Terus, cek dengan ini:
+```
+cat /etc/bind/marley/marley.it06.com
+cat /etc/bind/eldia/eldia.it06.com
+```
+- Lalu restart BIND service-nya.
+```
+sudo systemctl restart bind9
+```
 # NO 1
 Lakukan konfigurasi sesuai dengan peta yang sudah diberikan.
 # NO 1.1 - 1.5
@@ -329,7 +419,7 @@ subnet 192.236.1.0 netmask 255.255.255.0 {
     range 192.236.1.50 192.236.1.100;
     option routers 192.236.1.1;
     option broadcast-address 192.236.1.255;
-    option domain-name-servers 192.236.4.2;  # Fritz DNS Server - NO 4
+    option domain-name-servers 192.236.4.3;  # Fritz DNS Server - NO 4
     default-lease-time 1800;  # Lease time 30 menit untuk Marley - NO 5
     max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
 }
@@ -339,7 +429,7 @@ subnet 192.236.2.0 netmask 255.255.255.0 {
     range 192.236.2.81 192.236.2.243;
     option routers 192.236.2.1;
     option broadcast-address 192.236.2.255;
-    option domain-name-servers 192.236.4.2;  # Fritz DNS Server - N0 4
+    option domain-name-servers 192.236.4.3;  # Fritz DNS Server - N0 4
     default-lease-time 360;   # Lease time 6 menit untuk Eldia - NO 5
     max-lease-time 5220;      # Lease time maksimal 87 menit - NO 5
 }
@@ -353,15 +443,23 @@ subnet 192.236.4.0 netmask 255.255.255.0 {
 }
 ```
 
-# DOKUMENTASI NO 1.2
-![WhatsApp Image 2024-10-27 at 17 01 03_ce6ef941](https://github.com/user-attachments/assets/6192360f-13b6-4f1b-af41-d63326760e8f)
+# DOKUMENTASI NO 1.2 [IP ZEKE]
+![WhatsApp Image 2024-10-30 at 20 12 41_c7bc2530](https://github.com/user-attachments/assets/6ec69f23-c3c2-439e-8c9e-e2c38ae38da0)
 
-# DOKUMENTASI NO 1.3
-![WhatsApp Image 2024-10-27 at 17 02 36_c5f7573d](https://github.com/user-attachments/assets/edf39a11-34b6-4e6e-abbe-a1d01e5a212e)
+# DOKUMENTASI NO 1.3 [IP ERWIN]
+![WhatsApp Image 2024-10-30 at 20 13 02_1b5984f4](https://github.com/user-attachments/assets/d9a43b04-6d9c-48a9-9933-4a753708b923)
 
-# DOKUMENTASI NO 1.4
-![WhatsApp Image 2024-10-27 at 17 28 53_94750658](https://github.com/user-attachments/assets/25f46097-017f-4e63-a3a1-6e6b85fa908f)
-![WhatsApp Image 2024-10-27 at 17 30 55_e11b13a8](https://github.com/user-attachments/assets/2d8fcab8-fec0-416d-9a83-90fdb2f79f52)
+# DOKUMENTASI NO 1.4 [PING ELDIA.ITO6.COM DAN PING MARLET.IT06.COM]
+![WhatsApp Image 2024-10-30 at 20 07 03_6be7e50a](https://github.com/user-attachments/assets/10493cdd-3b14-47eb-b3c5-deb5f02ef7c2)
+
+![WhatsApp Image 2024-10-30 at 20 06 15_0b6ed45a](https://github.com/user-attachments/assets/acb1e907-ad03-41ae-ad1a-77cbde1ab762)
+
+# DOKUMENTASI 1.5 [LEASE TIME]
+![WhatsApp Image 2024-10-30 at 20 06 48_f0507c84](https://github.com/user-attachments/assets/f24bd7c9-af40-4c3e-be8e-5f2ed3a1d545)
+
+![WhatsApp Image 2024-10-30 at 20 07 21_bca7c5f5](https://github.com/user-attachments/assets/86154169-b53f-4550-a2af-b29bbea6899f)
+
+
 
 
 
